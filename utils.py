@@ -39,7 +39,7 @@ def preprocess(hycube,hycube_y,n_components=4,split=True,wsize=25):
                 hycube_y[i,j]=4
     X,y = patchify(new_hycube,hycube_y,wsize)
     if split:
-        X_train,X_test,y_train,y_test = train_test_split(X,y,train_size=0.20)
+        X_train,X_test,y_train,y_test = train_test_split(X,y,train_size=0.80)
         X_train =np.reshape(X_train,(-1,X_train.shape[3],X_train.shape[1],X_train.shape[2]))
         X_test= np.reshape(X_test,(-1,X_test.shape[3],X_test.shape[1],X_test.shape[2]))
         y_train = y_train.astype(int)
