@@ -2,5 +2,4 @@ __pycache__/
 .ipynb_checkpoints/
 baseline/models/
 baseline/results/eval_acc.png
-baseline/results/acc_20_train.jpg
-ssl/
+
