@@ -3,5 +3,4 @@ __pycache__/
 baseline/models/
 baseline/results/eval_acc.png
 baseline/results/acc_20_train.jpg
-ssl/models
-ssl/results
+ssl/
