@@ -10,7 +10,7 @@ from sklearn.metrics import classification_report, cohen_kappa_score,confusion_m
 import numpy as np
 import seaborn as sns
 def report(model,filename=None):
-    test_dataset = HsiDataset(training=False)
+    test_dataset = HsiDataset(mode="test")
     test_loader = DataLoader(test_dataset,4751)
     it = test_loader._get_iterator()
     X_test,y_test = it.next()

@@ -8,7 +8,7 @@ import scipy.io as sio
 import utils 
 import matplotlib.pyplot as plt
 train_data = HsiDataset()
-test_data = HsiDataset(training=False)
+test_data = HsiDataset(tmode="test")
 train_dataloader = DataLoader(train_data,batch_size=32,shuffle=True)
 test_dataloader = DataLoader(test_data,batch_size=32)
 model = HSI_CNN()

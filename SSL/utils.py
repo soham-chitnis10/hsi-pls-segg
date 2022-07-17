@@ -1,4 +1,4 @@
-from  utils import dim_reduc,patchify,annotate
+from  ..utils import dim_reduc,patchify,annotate
 from sklearn.model_selection import train_test_split
 import numpy as np
 import torch
