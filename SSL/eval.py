@@ -3,15 +3,14 @@ import torch
 import scipy.io as sio
 import utils 
 import matplotlib.pyplot as plt
-from model import HSI_CNN
+from model import HSI_CNN,Encoder,FullyConnected
 from dataset import HsiDataset
 from torch.utils.data import DataLoader
 from sklearn.metrics import classification_report, cohen_kappa_score,confusion_matrix,accuracy_score
 import numpy as np
 import seaborn as sns
-def report(model,filename=None):
-    test_dataset = HsiDataset(mode="test")
-    test_loader = DataLoader(test_dataset,4751)
+def report(model,test_dataset,filename=None):
+    test_loader = DataLoader(test_dataset,test_dataset.__len__())
     it = test_loader._get_iterator()
     X_test,y_test = it.next()
     logits = model(X_test)
@@ -64,13 +63,17 @@ def visulize(model,hycube,hycube_y):
     plt.show()
 
 def main():
-    model = HSI_CNN()
-    model.load_state_dict(torch.load('models/best_model.pth'))
+    encoder = Encoder()
+    fully_connected = FullyConnected()
+    model = HSI_CNN(encoder,fully_connected)
+    model.load_state_dict(torch.load('ssl/models/best_model_crop_flip_color_jitter.pth'))
     model.eval()
-    # data = sio.loadmat('data/prep_data.mat')
-    # hycube = data['prep_sample']
-    # hycube_y = data['prep_mask']
-    report(model,'results/report.txt')
+    data = sio.loadmat('data/prep_data.mat')
+    hycube = data['prep_sample']
+    hycube_y = data['prep_mask']
+    visulize(model,hycube,hycube_y)
+    test_dataset = HsiDataset(mode="test")
+    # report(model,'ssl/results/report_crop_flip_color_jitter.txt')
 
 if __name__ == "__main__":
     main()
